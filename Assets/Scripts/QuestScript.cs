@@ -22,6 +22,7 @@ public class QuestScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        StopPlayer();
         if (objects[0])
         {
             Object1();
@@ -33,6 +34,7 @@ public class QuestScript : MonoBehaviour
         foreach (GameObject message in messages)
         {
             message.SetActive(false);
+            PlayerController.instance.isBusy = false;
         }
     }
 
@@ -41,6 +43,17 @@ public class QuestScript : MonoBehaviour
         foreach (bool obj in objects)
         {
             obj.Equals(false);
+        }
+    }
+
+    void StopPlayer()
+    {
+        foreach (GameObject message in messages)
+        {
+            if (message.activeSelf)
+            {
+                PlayerController.instance.isBusy = true;
+            }
         }
     }
 
