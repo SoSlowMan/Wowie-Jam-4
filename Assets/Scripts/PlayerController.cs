@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     string currentLevel;
     public bool isBusy;
     private SpriteRenderer sprite;
+    public bool hasObj1;
 
     public static PlayerController instance;
 
@@ -26,7 +27,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        sprite = GetComponentInChildren<SpriteRenderer>();
+        sprite = GetComponent<SpriteRenderer>();
         //AudioController.instance.PlayLevelMusic();
         anim = GetComponent<Animator>();
         currentLevel = SceneManager.GetActiveScene().name;
@@ -35,7 +36,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        hasObj1 = false;   
     }
 
     // Update is called once per frame
@@ -57,15 +58,13 @@ public class PlayerController : MonoBehaviour
             {
                 State = States.MoveYDown;
             }
+
+            if (Input.GetAxis("Horizontal") != 0)
+            {
+                State = States.run;
+                sprite.flipX = moveVertical.x > 0.0f;
+            }
         }
-    }
-
-    private void Run()
-    {
-        State = States.run; //включение анимации бега
-
-        Vector3 dir = transform.right * Input.GetAxis("Horizontal");
-        sprite.flipX = dir.x < 0.0f;
     }
 
     public enum States

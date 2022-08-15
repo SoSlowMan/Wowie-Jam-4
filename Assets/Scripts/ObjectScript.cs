@@ -17,10 +17,14 @@ public class ObjectScript : MonoBehaviour
                 {
                     case ("Object1"):
                         QuestScript.instance.objects[0] = true;
+                        Destroy(gameObject);
+                        break;
+                    case ("AI"):
+                        QuestScript.instance.objects[1] = true;
                         break;
                 }
-                Destroy(gameObject);
             }
         }
+        else buttonPromt.SetActive(false);
     }
 }
