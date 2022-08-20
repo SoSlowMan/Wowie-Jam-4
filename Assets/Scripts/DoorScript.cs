@@ -10,7 +10,7 @@ public class DoorScript : MonoBehaviour
     [SerializeField] Animator anim1, anim2;
     void Start()
     {
-        //isLocked = true;
+        isLocked = true;
         isOpened = false;
         anim1 = transform.GetChild(0).GetComponentInChildren<Animator>();
         anim2 = transform.GetChild(1).GetComponentInChildren<Animator>();
