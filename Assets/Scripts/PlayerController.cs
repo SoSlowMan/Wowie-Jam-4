@@ -15,8 +15,9 @@ public class PlayerController : MonoBehaviour
     public bool isBusy;
     private SpriteRenderer sprite;
     public bool hasObj1;
+    [SerializeField] Animator dialogueAnim;
 
-    public static PlayerController instance;
+    public static PlayerController instance { get; set; }
 
     private States State //свойство типа States
     {
@@ -42,7 +43,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (dialogueAnim.GetBool("IsOpened") == true)
+        {
+            isBusy = true;
+            State = States.idle;
+        }
+        else isBusy = false;
+
         if (!isBusy)
         {
             State = States.idle;

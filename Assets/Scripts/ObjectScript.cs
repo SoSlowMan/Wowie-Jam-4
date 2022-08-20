@@ -3,7 +3,8 @@
 public class ObjectScript : MonoBehaviour
 {
     [SerializeField] float playerRange;
-    [SerializeField] GameObject buttonPromt;
+    [SerializeField] public GameObject buttonPromt;
+    [SerializeField] public Dialogue[] dialogue;
 
     // Update is called once per frame
     void Update()
@@ -16,11 +17,13 @@ public class ObjectScript : MonoBehaviour
                 switch (name)
                 {
                     case ("Object1"):
-                        QuestScript.instance.objects[0] = true;
+                        PlayerController.instance.hasObj1 = true;
+                        DialogueManager.instance.StartDialogue(dialogue[0]);
+                        DoorsScript.instance.OpenDoor(0);
                         Destroy(gameObject);
                         break;
                     case ("AI"):
-                        QuestScript.instance.objects[1] = true;
+                        //QuestScript.instance.objectBools[1] = true;
                         break;
                 }
             }
